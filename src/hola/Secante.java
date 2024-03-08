@@ -1,8 +1,11 @@
 package hola;
+import java.math.BigDecimal;
 
+import java.text.DecimalFormat;
 public class Secante {
     
 	public static void main(String[] args) {
+
 		
 		double x1 =80;
 		double x2 = 90;
@@ -13,7 +16,10 @@ public class Secante {
 		double f3 = 0;
 		
 		double error= 0.00001;
+		int puntos = 5;
 		int NC = 100;
+		BigDecimal bd = null;
+       
 
 				
 		Imprimir();
@@ -23,13 +29,30 @@ public class Secante {
 		for (int i = 0; i<NC; i++ ) {
 			
 			f1=calcular(x1);
+
+			bd = new BigDecimal(f1);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	f1 = bd.doubleValue();
+
 			f2=calcular(x2);
+
+			bd = new BigDecimal(f2);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	f2 = bd.doubleValue();
+
 			x3=tres(x1,x2,f1,f2);
+			bd = new BigDecimal(x3);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	x3 = bd.doubleValue();
+
 			f3=calcular(x3);
+			bd = new BigDecimal(f3);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	f3 = bd.doubleValue();
 			
 			System.out.printf("%d %15.6f %15.6f %15.6f %15.6f %15.6f  %15.6f\n",i+1,x1,f1,x2,f2,x3,f3);
 			
-			if( Math.abs(f3) > 0.00001 ) {
+			if( Math.abs(f3) > error ) {
 				x1=x2;
 				x2=x3;
 				f1=f2;

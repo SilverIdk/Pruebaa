@@ -1,15 +1,18 @@
 package hola;
+import java.math.BigDecimal;
 
 import java.util.Scanner;
 
 public class otroMetodo {
     
 	public static void main(String[] args) {
+		
 		double fd1 = 0;
 		double x1 = -4;
 		double x2 = 0;
 		double fx2 = 0;
         double error = 0.000001;
+		int puntos = 6;
         int Tc = 50;
 		
 		int Nc= 1;
@@ -38,14 +41,28 @@ public class otroMetodo {
 		
         //Funcion x1
 		double fx1= Math.pow(x1, 3) - Math.pow(x1, 2)- 4*x1 + 4;
+		BigDecimal bd = new BigDecimal(fx1);
+        bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        fx1 = bd.doubleValue();
 		
 		do {
 			//derivada x1
 			fd1 =   3 * Math.pow(x1, 2) - 2 * x1 - 4;
+			bd = new BigDecimal(fd1);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	fd1 = bd.doubleValue();
+
 			x2 = x1 - (fx1/fd1);
+
+			bd = new BigDecimal(x2);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	x2 = bd.doubleValue();
 
             //Funcion de x2
 			fx2 = Math.pow(x2, 3) - Math.pow(x2, 2)- 4*x2 + 4;
+			 bd = new BigDecimal(fx2);
+        	bd = bd.setScale(puntos, BigDecimal.ROUND_DOWN);
+        	fx2 = bd.doubleValue();
 			
 			System.out.printf("%d %15.6f %15.6f %15.6f %15.6f %15.6f\n",Nc,x1,fx1,fd1,x2,fx2);
 			
